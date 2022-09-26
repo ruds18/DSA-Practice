@@ -1,5 +1,5 @@
 
-# DSA Question’s Tracker
+# Leetcode & GFG DSA Question’s Solutions.
  Topic wise list of all the questions practiced
 - Coding Profiles - [Leetcode](https://leetcode.com/rudranshkhandelwal123/) , [GFG](https://auth.geeksforgeeks.org/user/rudranshkhandelwal123/practice)
 - ####  For More In depth bifercation (Inlcudes difficulty , platform used to solve the particular problem , particular dates on which problems were solved) - [notion](https://foul-cook-ae3.notion.site/DSA-Question-s-Tracker-bbc37f14bb86422294d720ac180da6d6) 
