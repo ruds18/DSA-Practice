@@ -38,6 +38,13 @@
 - Unique Morse Code Words
 - Decode the Message
 - Count Asterisks
+- Longest Substring Without Repeating Characters
+-  Removing Stars From a String
+- 316. Remove Duplicate Letters 🔥
+- Optimal Partition of String 🔥
+- Length of the Longest Alphabetical Continuous Substring 🔥
+- Longest Common Prefix 🔥 
+
 
 ## Singly Linked List
 - Reverse Linked List
@@ -91,4 +98,11 @@
 - Insert into a Binary Search Tree
 - Delete Node in a BST  🔥
 - Find a pair with given target in BST
+
+## Weekly Contest (Leetcode)
+- Sort the People
+- Find All Good Indices
+- 2405. Optimal Partition of String
+
+
 
