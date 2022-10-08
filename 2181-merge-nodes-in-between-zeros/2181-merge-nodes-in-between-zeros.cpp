@@ -20,7 +20,7 @@ public:
             }else{
                 if(nxt->next == NULL){
                     cur->next = NULL;
-                    cur = nxt;
+            
                 }else{
                         cur->next = nxt;
                         cur=nxt;
