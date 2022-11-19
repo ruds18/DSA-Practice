@@ -2,7 +2,6 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         int ans=0;
-      int reqCnt = nums.size()/2;
         
       
       unordered_map<int, int>mp;
@@ -11,7 +10,7 @@ public:
       }
         
      for(auto x:mp){
-         if(x.second > reqCnt){
+         if(x.second > nums.size()/2){
              ans = x.first;
              break;
          }
