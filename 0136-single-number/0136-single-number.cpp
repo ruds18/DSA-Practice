@@ -2,10 +2,9 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         // Bit Manuplaition
-        int ans=0;
-        for(auto i : nums){
-            ans = ans^i;
-        }
-        return ans;
+       for(int i=0; i<nums.size()-1;i++){
+           nums[i+1] = nums[i] ^ nums[i+1];
+       }
+        return nums[nums.size()-1];
     }
 };
