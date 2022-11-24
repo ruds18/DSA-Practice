@@ -8,19 +8,11 @@ public:
             mp[i]++;
         }
         int ans =0;
-        bool oddFound = false;
-        for(auto cnt :mp){
-            // Even
-            if(cnt.second % 2 == 0){
-                ans += cnt.second;
-            }else{
-                // Odd
-                oddFound = true;
-                ans += cnt.second-1;
-            }
-        }
-        if(oddFound) ans++;
         
+        for(auto v:mp){
+            ans += v.second / 2*2;
+            if(ans %2  == 0 && v.second%2 == 1) ans++;
+        }
         return ans;
     }
 };
