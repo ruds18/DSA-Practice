@@ -11,41 +11,45 @@ class Solution
 	{
 	    int n = grid.size();
 	    int m = grid[0].size();
-	    vector<vector<int>>dist(n , vector<int>(m,0));
-	    vector<vector<int>>vis(n, vector<int>(m,0));
-	    queue<pair<pair<int, int> , int>> q;
-	    
-	    for(int i=0; i<n; i++){
-	        for(int j=0; j<m; j++){
-	            if(grid[i][j] == 1){
-	                vis[i][j] = 1;
-	                q.push({{i,j} , 0});
-	            }else{
-	                vis[i][j] = 0;
-	            }
-	        }
-	    }
-	    int deltaRow[] = {-1, 0 , +1 , 0};
-	    int deltaCol[] = {0 , +1 , 0 , -1};
-	    while(!q.empty()){
-	        int row = q.front().first.first;
-	        int col = q.front().first.second;
-	        int steps = q.front().second;
+	    int deltaRow[] = {-1, 0, +1, 0};
+	    int deltaCol[] = {0, +1,0,-1};
+	    vector<vector<bool>>vis(n, vector<bool>(m, false));
+        vector<vector<int>>ans(n, vector<int>(m , 0));
+        
+        queue<pair<pair<int,int>,int>>q;
+        int steps =0;
+        // BFS traversal
+        for(int row = 0; row<n;row++){
+            for(int col =0;col<m;col++){
+                // starting points to be pushed in queue
+                if(grid[row][col] == 1){
+                    q.push({{row,col}, steps});
+                    vis[row][col] = true;
+                }
+            }
+        }
+        
+        // moving each by 1 steps 
+        while(!q.empty()){
+            int row = q.front().first.first;
+            int col = q.front().first.second;
+            steps = q.front().second;
+            q.pop();
+            
+            ans[row][col] = steps;
+            
+            for(int k=0; k<4;k++){
+                int nrow = row + deltaRow[k];
+                int ncol = col + deltaCol[k];
+                
+             if(nrow >=0 && nrow<n && ncol >=0 && ncol < m && grid[nrow][ncol] == 0 && !vis[nrow][ncol]){
+                 q.push({{nrow, ncol}, steps+1});
+                 vis[nrow][ncol] = true;
+             }
+            }
+        }
+        return ans;
 
-	        q.pop();
-	        dist[row][col] = steps;
-	        
-	        for(int k=0; k<4;k++){
-	            int nRow = row + deltaRow[k];
-	            int nCol = col + deltaCol[k];
-	          
-	          if(nRow>=0 && nRow < n && nCol >=0 && nCol < m && vis[nRow][nCol] ==0){
-	              vis[nRow][nCol] = 1;
-	              q.push({{nRow , nCol} , steps+1});
-	          }
-	        }
-	    }
-	    return dist;
 	}
 };
 
