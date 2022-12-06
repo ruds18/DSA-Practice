@@ -11,45 +11,39 @@ class Solution
 	{
 	    int n = grid.size();
 	    int m = grid[0].size();
-	    int deltaRow[] = {-1, 0, +1, 0};
-	    int deltaCol[] = {0, +1,0,-1};
-	    vector<vector<bool>>vis(n, vector<bool>(m, false));
-        vector<vector<int>>ans(n, vector<int>(m , 0));
-        
-        queue<pair<pair<int,int>,int>>q;
-        int steps =0;
-        // BFS traversal
-        for(int row = 0; row<n;row++){
-            for(int col =0;col<m;col++){
-                // starting points to be pushed in queue
-                if(grid[row][col] == 1){
-                    q.push({{row,col}, steps});
-                    vis[row][col] = true;
-                }
-            }
-        }
-        
-        // moving each by 1 steps 
-        while(!q.empty()){
-            int row = q.front().first.first;
-            int col = q.front().first.second;
-            steps = q.front().second;
-            q.pop();
-            
-            ans[row][col] = steps;
-            
-            for(int k=0; k<4;k++){
-                int nrow = row + deltaRow[k];
-                int ncol = col + deltaCol[k];
-                
-             if(nrow >=0 && nrow<n && ncol >=0 && ncol < m && grid[nrow][ncol] == 0 && !vis[nrow][ncol]){
-                 q.push({{nrow, ncol}, steps+1});
-                 vis[nrow][ncol] = true;
-             }
-            }
-        }
-        return ans;
-
+	   vector<vector<bool>>vis(n, vector<bool>(m, false));
+	   vector<vector<int>>ans(n, vector<int>(m, 0));
+	   queue<pair<pair<int, int>, int>>q;
+	   int steps = 0;
+	   for(int row = 0; row<n; row++){
+	       for(int col =0 ;col<m; col++){
+	           // search for 1
+	           if(grid[row][col] == 1 && !vis[row][col]){
+	               q.push({{row, col}, steps});
+	               vis[row][col] = true;
+	           }
+	       }
+	   }
+	   int deltaRow[] ={-1, 0, +1, 0};
+	   int deltaCol[] = {0, +1, 0, -1};
+	   
+	   while(!q.empty()){
+	       int row = q.front().first.first;
+	       int col = q.front().first.second;
+	       steps= q.front().second;
+	       ans[row][col] = steps;
+	       q.pop();
+	       for(int k=0; k<4; k++){
+	       int nrow = row + deltaRow[k];
+	       int ncol = col + deltaCol[k];
+	       if(nrow>=0 && nrow<n && ncol >=0 && ncol < m && grid[nrow][ncol] == 0 && !vis[nrow][ncol]){
+	           q.push({{nrow, ncol}, steps+1});
+	           vis[nrow][ncol] = true;
+	       }
+	   }
+	   }
+	   return ans;
+	   
 	}
 };
 
