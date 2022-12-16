@@ -42,6 +42,8 @@ public:
         ListNode* index1 = head;
         ListNode* index2 = middle->next;
         
+        // always left part nodes number > right part nodes number 
+        
         while(index2){
             if(index1->val != index2->val) return false;
             index1 = index1->next;
