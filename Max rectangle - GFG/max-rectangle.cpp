@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution{
     private:
-    vector<int>prevSmallerElement(int* heights , int n){
+    vector<int>prevSmallerElement(int heights[] , int n){
         stack<int>st;
         st.push(-1);
         // Pushing indexes
@@ -24,20 +24,19 @@ class Solution{
         return ans;
     }
     
-    vector<int>nextSmallerElement(int *heights , int n){
+    vector<int> nextSmallerElement(int heights[], int n){
         stack<int>st;
-        // ℹ️  We have return the index not the values
-        st.push(-1); // Default value
+        st.push(-1);
         vector<int>ans(n);
-        for(int i=n-1 ;i>=0 ;i--){
-            while( st.top() != -1  &&  heights[st.top()] >= heights[i]){
+        for(int i=n-1; i>=0;i--){
+            while(st.top() != -1 && heights[st.top()] >= heights[i]){
                 st.pop();
             }
             ans[i] = st.top();
             st.push(i);
         }
         return ans;
-    }
+    };
     
     int histogramArea(int heights[] , int n){
         vector<int>prev(n);
