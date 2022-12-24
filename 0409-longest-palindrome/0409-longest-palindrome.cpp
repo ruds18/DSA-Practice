@@ -10,7 +10,7 @@ public:
         int ans =0;
         
         for(auto v:mp){
-            ans += v.second / 2*2;
+            ans += (v.second / 2) * 2;
             if(ans %2  == 0 && v.second%2 == 1) ans++;
         }
         return ans;
