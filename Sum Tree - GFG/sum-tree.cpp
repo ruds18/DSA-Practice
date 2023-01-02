@@ -95,44 +95,24 @@ struct Node
 class Solution
 {
     public:
-    pair<bool,int> isSumTreeFast(Node*root){
-        //base case
-        if(root == NULL){
-            pair<bool,int> p = make_pair(true , 0);
-            return p;
-        }
-        // Leaf node
-        if(!root->left && !root->right){
-            pair<bool,int> p = make_pair(true , root->data);
-            return p;
-        }
-        
-        pair<bool, int> leftSubTree = isSumTreeFast(root->left);
-        pair<bool,int>rightSubTree = isSumTreeFast(root->right);
-        
-        bool left = leftSubTree.first;
-        bool right = rightSubTree.first;
-        bool sum = root->data == (leftSubTree.second + rightSubTree.second);
-        
-        pair<bool, int>ans;
-        if(left && right & sum) 
-        {
-            ans.first = true;  
-            ans.second = 2*root->data; 
-            
-        } 
-        else ans.first = false;
-        
-        
-        return ans;
-        
+    // global varaible
+    bool ans = true;
+    
+    int solve(Node* root){
+      if(root == NULL) return NULL;
+      if(!root->left && !root->right) return root->data;
+      if(!ans)return 0;
+      int leftSum = solve(root->left);
+      int rightSum = solve(root->right);
+      if(leftSum + rightSum == root->data) ans = true; else ans = false;
+      return leftSum + rightSum + root->data;
     }
-    
-    
     
     bool isSumTree(Node* root)
     {
-         return isSumTreeFast(root).first;
+         ans = true;
+         solve(root);
+         return ans;
     }
 };
 
