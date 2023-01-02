@@ -95,39 +95,44 @@ struct Node
 class Solution
 {
     public:
-    pair<bool, int> isSumTreeFast(Node* root){
+    pair<bool,int> isSumTreeFast(Node*root){
         //base case
         if(root == NULL){
-            pair<bool,int> p = make_pair(true, 0);
+            pair<bool,int> p = make_pair(true , 0);
             return p;
         }
-        if(root->left == NULL && root ->right == NULL){
-            pair<bool, int> p = make_pair(true , root->data);
+        // Leaf node
+        if(!root->left && !root->right){
+            pair<bool,int> p = make_pair(true , root->data);
             return p;
         }
         
-        pair<bool,int> leftSubtree = isSumTreeFast(root->left);
-        pair<bool,int> rightSubtree  = isSumTreeFast(root->right);
+        pair<bool, int> leftSubTree = isSumTreeFast(root->left);
+        pair<bool,int>rightSubTree = isSumTreeFast(root->right);
         
-        bool left = leftSubtree.first;
-        bool right = rightSubtree.first;
-        bool cond = root->data == (leftSubtree.second + rightSubtree.second);
+        bool left = leftSubTree.first;
+        bool right = rightSubTree.first;
+        bool sum = root->data == (leftSubTree.second + rightSubTree.second);
         
-        pair<bool,int>ans;
-        
-        if(left && right && cond) {
-             ans.first = true;
-             ans.second = 2*root->data;
+        pair<bool, int>ans;
+        if(left && right & sum) 
+        {
+            ans.first = true;  
+            ans.second = 2*root->data; 
             
-            }else {
-             ans.first = false;
-            }
-         return ans;
-    };
+        } 
+        else ans.first = false;
+        
+        
+        return ans;
+        
+    }
+    
+    
+    
     bool isSumTree(Node* root)
     {
-        return isSumTreeFast(root).first;
-        
+         return isSumTreeFast(root).first;
     }
 };
 
