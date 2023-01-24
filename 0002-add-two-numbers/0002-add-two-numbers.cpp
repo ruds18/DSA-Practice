@@ -15,7 +15,7 @@ public:
         ListNode* dummyTail = dummyHead;
         int carry =0 , digit =0;
         
-        while(l1 || l2 || carry != 0 ){
+        while(l1 || l2  ){
             int x = l1 ? l1->val : 0;
             int y = l2 ? l2->val : 0;
             
@@ -31,7 +31,7 @@ public:
             l2 = l2 ? l2->next : nullptr;
         }
         if(carry !=0){
-            dummyTail->next = new ListNode(digit);
+            dummyTail->next = new ListNode(carry);
             dummyTail = dummyTail->next;
         }
         return dummyHead->next;
