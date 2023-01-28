@@ -1,18 +1,17 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        unordered_map<char, int>mp;
-        
-        // Step 1
-        for(auto i :s){
-            mp[i]++;
+        int result = 0;
+        //step 1
+        unordered_map<char , int>mp;
+        for(int i=0; i<s.length();i++){
+            mp[s[i]]++;
         }
-        int ans =0;
-        
-        for(auto v:mp){
-            ans += (v.second / 2) * 2;
-            if(ans %2  == 0 && v.second%2 == 1) ans++;
+        //step 2
+        for(auto iter:mp){
+         result += iter.second/2 * 2;
+         if(result%2 == 0 && iter.second % 2 ==1 ) result += 1;
         }
-        return ans;
+        return result;
     }
 };
