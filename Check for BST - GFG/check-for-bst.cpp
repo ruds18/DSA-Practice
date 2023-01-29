@@ -22,23 +22,29 @@ struct Node {
 class Solution
 {
     public:
-    //Function to check whether a Binary Tree is BST or not.
-    bool checkBST(Node* root , int min, int maxi){
+    
+    void inOrder(Node* &root, vector<int>&traversal){
         //base case
-        if(root == NULL) return true;
+        if(root == NULL) return;
         
-        if(root->data >= min && root->data <=maxi){
-            bool left = checkBST(root->left, min, root->data);
-            bool right = checkBST(root->right, root->data, maxi);
-            return left && right;
-        }else {
-            return false;
-        }
+        //Left Subtree
+        inOrder(root->left, traversal);
+        //Node
+        traversal.push_back(root->data);
+        //Right Subtree
+        inOrder(root->right, traversal);
     }
     
     bool isBST(Node* root) 
     {
-        return checkBST(root, INT_MIN, INT_MAX);
+        // Inorder traversal of BST is sorted
+        vector<int>traversal;
+        inOrder(root, traversal);
+        
+        for(int i=0;i<traversal.size()-1;i++){
+            if(traversal[i] > traversal[i+1]) return false;
+        }
+        return true;
     }
 };
 
