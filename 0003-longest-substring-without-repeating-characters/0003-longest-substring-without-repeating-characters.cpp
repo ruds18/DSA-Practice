@@ -2,9 +2,9 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         if(s.length() == 0) return 0;
-        int longestCnt=1;
+        int longestCnt=0;
         for(int i=0; i<s.length();i++){
-            set<int>st;
+            set<char>st;
             int cnt =0;
             for(int j=i; j<s.length();j++){
                 st.insert(s[j]);
@@ -16,6 +16,6 @@ public:
             }
             longestCnt = max(longestCnt , cnt);
             }
-        return ( longestCnt);
+        return (longestCnt);
     }
 };
