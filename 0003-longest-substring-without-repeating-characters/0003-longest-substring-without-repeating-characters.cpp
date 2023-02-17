@@ -1,7 +1,6 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if(s.length() == 0) return 0;
         int longestCnt=0;
         for(int i=0; i<s.length();i++){
             set<char>st;
