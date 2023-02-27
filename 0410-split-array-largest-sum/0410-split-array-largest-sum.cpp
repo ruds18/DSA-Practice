@@ -19,7 +19,7 @@ public:
 
     int splitArray(vector<int>& nums, int k) {
 
-        int start = 0 , sum=0;
+        int start = nums[0] , sum=0;
         for(auto i:nums) sum += i;
         int end = sum;
         int ans = -1;
