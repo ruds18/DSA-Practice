@@ -2,15 +2,16 @@ class Solution {
 public:
     vector<int>globalNums;
     Solution(vector<int>& nums) {
-        for(auto num : nums) globalNums.push_back(num);
+        globalNums = nums;
     }
     
     int pick(int target) {
         int ans =0 , n = 0;
         for(int i=0; i<globalNums.size();i++){
-            if(globalNums[i] != target) continue;
-              n++;
+            if(globalNums[i] == target){
+                  n++;
             if(rand() % n == 0){ans = i;}// with prob 1/(n+1) to replace the previous index
+            };
         }
         return ans;
     }
