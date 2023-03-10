@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    map<int,ListNode*>mp;
+    unordered_map<int,ListNode*>mp;
     Solution(ListNode* head) {
         ListNode* temp = head;
         int i=0;
