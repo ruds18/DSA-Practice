@@ -10,20 +10,19 @@
  */
 class Solution {
 public:
-    ListNode* head = NULL;
+    map<int,ListNode*>mp;
     Solution(ListNode* head) {
-        this->head = head;
+        ListNode* temp = head;
+        int i=0;
+        while(temp){
+            mp[i++] = temp;
+            temp = temp->next;
+        }
     }
     
     int getRandom() {
-        int ans =0 , i=1;
-        ListNode* p = head;
-        while(p){
-            if(rand() % i == 0) ans = p->val;
-            i++;
-            p= p->next;
-        }
-        return ans;
+        int n = mp.size();
+        return mp[rand()%n]->val;
     }
 };
 
