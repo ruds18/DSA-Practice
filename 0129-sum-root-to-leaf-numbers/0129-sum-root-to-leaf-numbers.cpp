@@ -11,29 +11,28 @@
  */
 class Solution {
 public:
-    void getNumber(TreeNode* root , int number ,  int &ans){
+    
+    void getSum(TreeNode* root , int &ans , int number ){
+        
+        //base case
         if(root == NULL) {
             return;
-        }
+        };
         
-         number = number*10 + root->val;
+       number = number*10 + root->val;
         
-        if(root->left == NULL && root->right == NULL){
+          if(root->left == NULL && root->right == NULL){
             ans += number;
         }
         
-        
-        getNumber(root->left , number , ans);
-        getNumber(root->right , number , ans);
-        
-    }
-    int sumNumbers(TreeNode* root) {
-        int number = 0;
-        int ans =0;
+        getSum(root->left,  ans, number);
+        getSum(root->right , ans , number);
 
-        getNumber(root , number , ans);
-      
-        
+    }
+    
+    int sumNumbers(TreeNode* root) {
+        int ans = 0 , temp =0;
+        getSum(root , ans , temp);
         return ans;
     }
 };
