@@ -8,9 +8,9 @@ public:
             mp[s[i]]++;
         }
         //step 2
-        for(auto iter:mp){
-         result += iter.second/2 * 2;
-         if(result%2 == 0 && iter.second % 2 ==1 ) result += 1;
+        for(int i=0 ;i<mp.size();i++){
+            result += mp[i]/2 * 2;
+            if(result%2 == 0 && mp[i]%2 ==1  ) result += 1;
         }
         return result;
     }
