@@ -12,7 +12,6 @@ public:
                  if(st.top() == s[i]) st.pop();
                   else st.push(s[i]);
             }
-           
         }
         
         while(!st.empty()){
