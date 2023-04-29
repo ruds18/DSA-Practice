@@ -1,43 +1,49 @@
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& arr) {
-    
-           vector<int> ans;
-        int row = arr.size(), col = arr[0].size(), cnt = 0 ;
-        int totalNum = row*col;
-        int startingRow = 0 , endingRow = row-1;
-        int startingCol = 0 , endingCol = col-1;
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        int count=0;
+        int total=row*col;
+
+        int startingrow=0;
+        int startingcol=0;
+        int endingrow=row-1;
+        int endingcol=col-1;
         
-        while(cnt < totalNum){
-            //Traversing the FIRST ROW
-            for(int i =startingCol ; i<=endingCol && cnt<totalNum ; i++){
-                ans.push_back(arr[startingRow][i]);
-                cnt++;
+        vector<int>ans;
+
+        while(count < total)
+        {
+            for(int index=startingcol; count<total && index<=endingcol;index++)
+            {
+                ans.push_back(matrix[startingrow][index]);
+                count++;
             }
-            startingRow++;
+            startingrow++;
             
-            //Traversing the RIGHT COULUMN
-            for(int i =startingRow; i<=endingRow && cnt<totalNum ; i++ ){
-                ans.push_back(arr[i][endingCol]);
-                cnt++;
+            for(int index=startingrow; count<total && index<=endingrow;index++)
+            {
+                ans.push_back(matrix[index][endingcol]);
+                count++;
             }
-            endingCol--;
+            endingcol--;
             
-            //Traversing the BOTTOM ROW
-            for(int i =endingCol  ;i >=startingCol && cnt<totalNum ; i--){
-                ans.push_back(arr[endingRow][i]);
-                cnt++;
+            for(int index=endingcol;count<total && index>=startingcol;index--)
+            {
+                ans.push_back(matrix[endingrow][index]);
+                count++;
             }
-            endingRow--;
+            endingrow--;
             
-             //Traversing the LEFT COULUMN
-            for(int i =endingRow; i >= startingRow && cnt<totalNum ; i-- ){
-                ans.push_back(arr[i][startingCol]);
-                cnt++;
+            for(int index=endingrow; count < total && index>=startingrow; index--)
+            {
+                ans.push_back(matrix[index][startingcol]);
+                count++;
             }
-            startingCol++;
+            startingcol++;
+            
         }
-        
         return ans;
     }
 };
