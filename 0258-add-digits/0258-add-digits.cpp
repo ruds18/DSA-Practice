@@ -1,17 +1,23 @@
 class Solution {
 public:
-    int addDigits(int num) {
-        int ans=0;
-        
-        while(num >0){
-          ans +=  num%10;
-            num = num/10;
-            
-            if(num ==0 && ans >9){
-                num = ans;
-                ans=0;
-            }
+    void solve(int num , int &sum){
+        //base case
+        if(num == 0){
+            if(sum > 9){
+                num = sum;
+                sum =0;
+            }else return  ;
         }
-        return ans;
+        
+        sum += num%10;
+        num = num/10;
+        
+        solve(num , sum);
+        
+    }
+    int addDigits(int num) {
+        int sum =0;
+        solve(num , sum);
+        return sum;
     }
 };
