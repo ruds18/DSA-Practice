@@ -1,17 +1,13 @@
 class Solution {
 public:
-    int finalValueAfterOperations(vector<string>& operations) {
-        int ans =0;
-        for(auto operation : operations){
-            for(auto ops : operation){
-                
-                if(ops == '-') {ans--; break;}
-                if(ops == '+') {
-                    ans++;
-                    break;
-                }
-            }
+    int finalValueAfterOperations(vector<string>& op) {
+        int x = 0;
+        for(int i = 0; i < op.size(); i++){
+            if(op[i][0]=='+' || op[i][1]=='+')
+                x++;
+            else
+                x--;
         }
-        return ans;
+        return x;
     }
 };
