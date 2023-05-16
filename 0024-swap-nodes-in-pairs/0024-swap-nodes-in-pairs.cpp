@@ -11,44 +11,14 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-    if(!head || !head->next) return head; //If there are less than 2 nodes in the given nodes, then no need to do anything just return the list as it is.
-		
-        ListNode* dummyNode = new ListNode();
+        if(!head || !head->next) return head;
         
-        ListNode* prevNode=dummyNode;
-        ListNode* currNode=head;
+        ListNode* temp;
+        temp = head->next;
         
-        while(currNode && currNode->next){
-            prevNode->next = currNode->next;
-            currNode->next = prevNode->next->next;
-            prevNode->next->next = currNode;
-            
-            prevNode = currNode;
-            currNode = currNode->next;
-        }
+       head->next = swapPairs(head->next->next);
+        temp->next = head;
         
-        return dummyNode->next;
+        return temp;
     }
 };
-
-/*
-prev , cur , nxt
-
-prev = head
-cur = head->next
-next = head->next
-
-//concept
-
-nxt->next = prev
-cur->next = nxt->next
-prev = cur
-
-//loop
-while(nxt && nxt->next)
-
-
-
-
-
-*/
