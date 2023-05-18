@@ -10,29 +10,28 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
-    vector<int>dist(V, INT_MAX);
-      
-       dist[S] =0;
-       pq.push({0, S});
-       
-       while(!pq.empty()){
-           int dis = pq.top().first;
-           int front  = pq.top().second;
-           pq.pop();
-           
-           for(auto i: adj[front]){
-               int edgeWeight = i[1];
-               int adjNode = i[0];
-              
-               // check for better distance
-               if(edgeWeight + dis < dist[adjNode]){
-                   dist[adjNode] = edgeWeight + dis;
-                   pq.push({dist[adjNode] , adjNode});
-               }
-           }
-       }
-       return dist;
+        priority_queue<pair<int,int>, vector<pair<int,int>>,  greater<pair<int,int>>>pq;
+        vector<int>distances(V, INT_MAX);
+        
+        distances[S] = 0;
+        pq.push({0,S});
+        
+        while(!pq.empty()){
+            auto top = pq.top(); pq.pop();
+            int dist = top.first;
+            int node = top.second;
+            
+            for(auto it : adj[node]){
+                int edgeWeight =  it[1];
+                int adjNode = it[0];
+                
+                if(dist + edgeWeight  < distances[adjNode]){
+                    distances[adjNode] = dist + edgeWeight;
+                    pq.push({ dist + edgeWeight , adjNode});
+                }
+            }
+        }
+        return distances;
     }
 };
 
