@@ -1,27 +1,31 @@
 class Solution {
 public:
-    // Returns the elements in the first arg nums1 that don't exist in the second arg nums2.
-    vector<int> getElementsOnlyInFirstList(vector<int>& nums1, vector<int>& nums2) {
-        unordered_set<int> onlyInNums1;
-        
-        // Store nums2 elements in an unordered set. 
-        unordered_set<int> existsInNums2;
-        for (int num : nums2) {
-            existsInNums2.insert(num);
-        }
-        
-        // Iterate over each element in the list nums1.
-        for (int num : nums1) {
-            if (existsInNums2.find(num) == existsInNums2.end()) {
-                onlyInNums1.insert(num);
-            }
-        }
-        
-        // Convert to vector.
-        return vector<int> (onlyInNums1.begin(), onlyInNums1.end());
-    }
-    
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
-        return {getElementsOnlyInFirstList(nums1, nums2), getElementsOnlyInFirstList(nums2, nums1)};
+        unordered_map<int,int>mp;
+        vector<vector<int>>ans;
+        
+        set<int>set1;
+        set<int>set2;
+        
+        for(auto num1 : nums1) set1.insert(num1);
+        for(auto num2 : nums2) set2.insert(num2);
+        
+        
+        for(auto num1:set1)mp[num1]++;
+        for(auto num2:set2)mp[num2]++;
+        
+        vector<int>result;
+        for(auto num1:set1){
+            if(mp[num1] == 1) result.push_back(num1);
+        }
+        ans.push_back(result);
+        result.clear();
+        for(auto num2:set2){
+            if(mp[num2] == 1 ) result.push_back(num2);
+        }
+        ans.push_back(result);
+        
+        return ans;
     }
 };
+
