@@ -1,25 +1,24 @@
 class Solution {
 public:
     string predictPartyVictory(string senate) {
-        int count =0, len=0;
+        int len =0;
+        int size = senate.size();
+         int cnt =0;
         
         while(len != senate.size()){
-            string s;
             len = senate.size();
-            for(int i=0;i<len;i++){
-                if(senate[i] == 'R'){
-                    if(count++  >=0){
-                         s+= 'R';
-                    };
+            string newSenate="";
+            for(auto senator : senate){
+                if(senator == 'R' && cnt++ >=0){
+                   newSenate += 'R';
                 }
-                if(senate[i] == 'D'){
-                    if(count-- <=0) {
-                        s+= 'D';
-                    }
+                if(senator == 'D' && cnt-- <=0){
+                    newSenate += 'D';
                 }
             }
-            swap(s,senate);
+            // Re-loop
+            swap(newSenate , senate);
         }
-        if(senate[0] == 'R') return "Radiant"; else return "Dire";
+        if(senate[0]=='R') return "Radiant"; else return "Dire";
     }
 };
