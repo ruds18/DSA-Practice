@@ -1,21 +1,20 @@
 class LRUCache {
 public:
-    class node {
+    
+    class node{
         public:
         int key;
         int val;
         node* next;
         node* prev;
         
-        node(int _key , int _val){
+        node(int _key, int value){
             key = _key;
-            val = _val;
+            val  =value;
         }
     };
-    
     node* head = new node(-1,-1);
     node* tail = new node(-1,-1);
-    
     int cap;
     unordered_map<int,node*>m;
     
@@ -25,37 +24,35 @@ public:
         tail->prev = head;
     }
     
-    void addNode(node* newNode){
-        
-     node* temp = head->next;
-        newNode->next = temp;
-        newNode->prev = head;
-        head->next= newNode;
-        temp->prev = newNode;
+    void addNode(node* nodeToAdd){
+      nodeToAdd->next = head->next;
+      head->next->prev = nodeToAdd;
+        head->next = nodeToAdd;
+        nodeToAdd->prev = head;
     }
     
-    void deleteNode(node *delNode){
-        node* delPrev = delNode->prev;
-        node* delNext = delNode->next;
-        delPrev -> next = delNext;
-        delNext->prev = delPrev;
+    void deleteNode(node* nodeToDelete){
+        node* delNodePrev = nodeToDelete->prev;
+        node* delNodeNext = nodeToDelete->next;
+        delNodePrev->next = delNodeNext;
+        delNodeNext->prev = delNodePrev;
     }
     
     int get(int key_) {
         if(m.find(key_) != m.end()){
-            node* resNode = m[key_];
-            int res = resNode->val;
+            node* nodeToUpdate = m[key_];
+            int res= nodeToUpdate->val;
             m.erase(key_);
-            deleteNode(resNode);
-            addNode(resNode);
-            m[key_]= head->next;
+            deleteNode(nodeToUpdate);
+            addNode(nodeToUpdate);
+            m[key_] = head->next;
             return res;
         }
         return -1;
     }
     
     void put(int key_, int value) {
-        if(m.find(key_) != m.end()){
+       if(m.find(key_) != m.end()){
             node* existingNode = m[key_];
             m.erase(key_);
             deleteNode(existingNode);
@@ -69,3 +66,9 @@ public:
     }
 };
 
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
