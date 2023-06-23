@@ -1,24 +1,23 @@
 class Solution {
 public:
-    void solve(vector<string>&ans,string result ,  int open , int close , int n){
+    
+    void generate(vector<string>&ans , string output , int openCnt , int closeCnt , int n){
         //base case
-        if(result.size() == n*2){
-          ans.push_back(result);
+        if(openCnt>=n && closeCnt >= openCnt){
+            ans.push_back(output);
             return;
         }
         
-        if(open < n) solve(ans, result + "(",open+1,close,n);
-        if(close < open) solve(ans , result + ")" , open , close+1 ,n);
+        // left call
+        if(openCnt<n) generate(ans , output+"(", openCnt+1 , closeCnt , n);
+            //right call
+        if(closeCnt < openCnt) generate(ans , output +")" , openCnt , closeCnt+1, n);
     }
     
     vector<string> generateParenthesis(int n) {
         vector<string>ans;
-        string result="";
-        int open =0;
-        int close =0;
-        
-         solve(ans , result , open , close , n);
-        
+        string levelOutput="";
+        generate(ans ,levelOutput, 0, 0, n);
         return ans;
     }
 };
