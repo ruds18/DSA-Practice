@@ -1,31 +1,24 @@
 class Solution {
 public:
-    
-    bool isGoodSubstring(vector<int>counts){
-        return (counts[0] >=1 && counts[1]>=1 && counts[2]>=1);
-    }
-    
     int numberOfSubstrings(string s) {
-        
-        vector<int>counts(3,0);
-        int n = s.size();
         int i=0;
         int j=0;
-        int ans =0;
+        int ans = 0;
+        int n = s.size();
+        unordered_map<char,int>mp;
         
         while(j<n){
-            counts[s[j] - 'a']++;
+            mp[s[j]]++;
             
-            if(!isGoodSubstring(counts)){
-                j++;
-            }else{
-                while(isGoodSubstring(counts)){
-                    ans += n - j;
-                    counts[s[i]-'a']--;
+            if(mp.size() == 3){
+                while(mp.size() == 3){
+                    ans += n-j;
+                    mp[s[i]]--;
+                    if(mp[s[i]] == 0) mp.erase(s[i]);
                     i++;
                 }
-                j++;
             }
+            j++;
         }
         return ans;
     }
