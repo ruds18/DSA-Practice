@@ -12,23 +12,18 @@ class Solution{
     //Function to find the leaders in the array.
     public:
     vector<int> leaders(int a[], int n){
-        // next greater element
-        vector<int>ans;
-        vector<int>nextGreater(n);
-        stack<int>st;
-        st.push(-1);
+       int maxi = a[n-1];
+       vector<int>ans;
+       ans.push_back(a[n-1]);
+       for(int i = n-2; i>=0; i--){
+           if(a[i] >= maxi){
+               ans.push_back(a[i]);
+               maxi = max(a[i] , maxi);
+           }
+       }
+       reverse(ans.begin(),ans.end());
+    return ans;
         
-        for(int i=n-1;i>=0; i--){
-            while(st.top() != -1 && a[st.top()] <= a[i]){
-                st.pop();
-            }
-            nextGreater[i] = st.top();
-            st.push(i);
-        }
-        for(int i=0; i<n;i++){
-            if(nextGreater[i] == -1) ans.push_back(a[i]);
-        }
-        return ans;
     }
 };
 
